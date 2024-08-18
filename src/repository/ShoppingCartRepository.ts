@@ -2,14 +2,11 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 import { MySql } from "../database/mysql";
 import { ErrorCode } from "../model/ErrorCode";
-import { CreateProductDto } from "../model/dto/product/CreateProductDto";
-import { ProductEntity } from "../model/entity/ProductEntity";
-import { ProductDto } from "../model/dto/product/ProductDto";
 import { ShoppingCartItemDto } from "../model/dto/shoppingCartItem/ShoppingCartItemDto";
 import { ShoppingCartItemEntity } from "../model/entity/ShoppingCartItemEntity";
 
-export class ProductRepository {
-    private static instance: ProductRepository;
+export class ShoppingCartRepository {
+    private static instance: ShoppingCartRepository;
     private db: MySql;
 
     private constructor() {
@@ -17,11 +14,11 @@ export class ProductRepository {
         this.createTable();
     }
 
-    public static getInstance(): ProductRepository {
-        if (!ProductRepository.instance)
-            ProductRepository.instance = new ProductRepository();
+    public static getInstance(): ShoppingCartRepository {
+        if (!ShoppingCartRepository.instance)
+            ShoppingCartRepository.instance = new ShoppingCartRepository();
 
-        return ProductRepository.instance;
+        return ShoppingCartRepository.instance;
     }
 
     private async createTable() {
@@ -40,7 +37,7 @@ export class ProductRepository {
         }
     }
 
-    public async create(shoppingCartItem: ShoppingCartItemDto): Promise<ShoppingCartItemEntity | ErrorCode> {
+    public async add(shoppingCartItem: ShoppingCartItemDto): Promise<ShoppingCartItemEntity | ErrorCode> {
         const response = <ResultSetHeader | ErrorCode>await this.db.query(`INSERT INTO shoppingCartItems (userID, productID, quantity) VALUES (?, ?, ?)`,
             [shoppingCartItem.userID, shoppingCartItem.productID, shoppingCartItem.quantity]);
 
@@ -94,7 +91,7 @@ export class ProductRepository {
         return await this.getByID(shoppingCartItem.userID, shoppingCartItem.productID);
     }
 
-    public async delete(userID: number, productID: number): Promise<number | ErrorCode> {
+    public async remove(userID: number, productID: number): Promise<number | ErrorCode> {
         const response = <ResultSetHeader | ErrorCode>await this.db.query(`DELETE FROM shoppingCartItems WHERE userID = ? AND productID = ?`, 
             [userID, productID]);
 
