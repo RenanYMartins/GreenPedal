@@ -1,4 +1,4 @@
-export class ProductEntity {
+export class ProductDto {
     public readonly id: number;
     public name: string;
     public description: string;

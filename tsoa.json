@@ -15,13 +15,13 @@
       },
       "servers": [
         {
-          "url": "http://localhost:3040/api",
+          "url": "http://localhost:3000",
           "description": "Servidor de Desenvolvimento"
         }
       ]
     }
   },
   "routes": {
-    "routesDir": "src/route"
+    "routesDir": "src/routes"
   }
 }

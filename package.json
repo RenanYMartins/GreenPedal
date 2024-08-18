@@ -1,0 +1,26 @@
+{
+    "name": "green-pedal",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "build": "tsoa spec-and-routes && tsc",
+        "start": "tsoa spec-and-routes && tsc && node --env-file .env dist/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Ruhan Garatini e Renan Martins",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "express": "^4.19.2",
+        "mysql2": "^3.11.0",
+        "swagger-ui-express": "^5.0.1",
+        "tsoa": "^6.4.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/swagger-jsdoc": "^6.0.4",
+        "@types/swagger-ui-express": "^4.1.6",
+        "typescript": "^5.5.4"
+    }
+}
