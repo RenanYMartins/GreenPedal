@@ -5,6 +5,8 @@ import { TsoaRoute, fetchMiddlewares, ExpressTemplateService } from '@tsoa/runti
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../controller/UserController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ShoppingCartItemController } from './../controller/ShoppingCartController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProductController } from './../controller/ProductController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
@@ -79,6 +81,44 @@ const models: TsoaRoute.Models = {
         "properties": {
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ShoppingCartItemDto": {
+        "dataType": "refObject",
+        "properties": {
+            "userID": {"dataType":"double","required":true},
+            "productID": {"dataType":"double","required":true},
+            "quantity": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ShoppingCartItemEntity": {
+        "dataType": "refObject",
+        "properties": {
+            "userID": {"dataType":"double","required":true},
+            "productID": {"dataType":"double","required":true},
+            "quantity": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BaseResponseDto_ShoppingCartItemEntity_": {
+        "dataType": "refObject",
+        "properties": {
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"ShoppingCartItemEntity","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BaseResponseDto_ShoppingCartItemEntity-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"ShoppingCartItemEntity"},"required":true},
         },
         "additionalProperties": false,
     },
@@ -304,6 +344,135 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'deleteUser',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/shoppingCartItem',
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController.prototype.addItemToShoppingCart)),
+
+            async function ShoppingCartItemController_addItemToShoppingCart(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    dto: {"in":"body","name":"dto","required":true,"ref":"ShoppingCartItemDto"},
+                    fail: {"in":"res","name":"400","required":true,"ref":"BaseErrorResponseDto"},
+                    success: {"in":"res","name":"201","required":true,"ref":"BaseResponseDto_ShoppingCartItemEntity_"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ShoppingCartItemController();
+
+              await templateService.apiHandler({
+                methodName: 'addItemToShoppingCart',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/shoppingCartItem/:userID',
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController.prototype.getShoppingCartByUserID)),
+
+            async function ShoppingCartItemController_getShoppingCartByUserID(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    userID: {"in":"path","name":"userID","required":true,"dataType":"double"},
+                    notFound: {"in":"res","name":"404","required":true,"ref":"BaseErrorResponseDto"},
+                    success: {"in":"res","name":"200","required":true,"ref":"BaseResponseDto_ShoppingCartItemEntity-Array_"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ShoppingCartItemController();
+
+              await templateService.apiHandler({
+                methodName: 'getShoppingCartByUserID',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/shoppingCartItem',
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController.prototype.updateShoppingCart)),
+
+            async function ShoppingCartItemController_updateShoppingCart(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    dto: {"in":"body","name":"dto","required":true,"ref":"ShoppingCartItemDto"},
+                    fail: {"in":"res","name":"400","required":true,"ref":"BaseErrorResponseDto"},
+                    success: {"in":"res","name":"200","required":true,"ref":"BaseResponseDto_ShoppingCartItemEntity_"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ShoppingCartItemController();
+
+              await templateService.apiHandler({
+                methodName: 'updateShoppingCart',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/shoppingCartItem',
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ShoppingCartItemController.prototype.deleteShoppingCartItem)),
+
+            async function ShoppingCartItemController_deleteShoppingCartItem(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    userID: {"in":"query","name":"userID","required":true,"dataType":"double"},
+                    productID: {"in":"query","name":"productID","required":true,"dataType":"double"},
+                    fail: {"in":"res","name":"400","required":true,"ref":"BaseErrorResponseDto"},
+                    success: {"in":"res","name":"202","required":true,"ref":"BaseResponseDto_number_"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new ShoppingCartItemController();
+
+              await templateService.apiHandler({
+                methodName: 'deleteShoppingCartItem',
                 controller,
                 response,
                 next,

@@ -60,16 +60,10 @@ export class ShoppingCartRepository {
         return new ShoppingCartItemEntity(response[0].userID, response[0].productID, response[0].quantity);
     }
 
-    public async getByUserID(userID: number): Promise<ShoppingCartItemEntity | ErrorCode> {
+    public async getItemsByUserID(userID: number): Promise<any[] | ErrorCode> {
         const response = <RowDataPacket[] | ErrorCode>await this.db.query(`SELECT * FROM shoppingCartItems WHERE userID = ?`, [userID]);
 
-        if (response instanceof ErrorCode)
-            return response;
-
-        if (response.length == 0)
-            return new ErrorCode(404, 'Item carrinho não encontrado');
-
-        return new ShoppingCartItemEntity(response[0].userID, response[0].productID, response[0].quantity);
+        return response;
     }
 
     public async getAll(): Promise<any[] | ErrorCode> {
