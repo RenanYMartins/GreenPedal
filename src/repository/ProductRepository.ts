@@ -40,7 +40,6 @@ export class ProductRepository {
     }
 
     public async create(product: CreateProductDto): Promise<ProductEntity | ErrorCode> {
-        const currentDate = new Date();
         const response = <ResultSetHeader | ErrorCode>await this.db.query(`INSERT INTO products (name, description, price, stock, category) VALUES (?, ?, ?, ?, ?)`,
             [product.name, product.description, product.price, product.stock, product.category]);
 
