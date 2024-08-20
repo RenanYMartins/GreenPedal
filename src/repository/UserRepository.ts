@@ -81,13 +81,6 @@ export class UserRepository {
         return response;
     }
 
-    public async getByPassword(password: string): Promise<any[] | ErrorCode> {
-        const response = <RowDataPacket[] | ErrorCode>await this.db.query(`SELECT * FROM users WHERE password = ?`,
-            [password]);
-
-        return response;
-    }
-
     public async update(user: UserDto): Promise<UserEntity | ErrorCode> {
         const response = <ResultSetHeader | ErrorCode>await this.db.query(`UPDATE users SET name = ?, email = ?, password = ?, userType = ? WHERE id = ?`,
             [user.name, user.email, user.password, user.userType, user.id]);
