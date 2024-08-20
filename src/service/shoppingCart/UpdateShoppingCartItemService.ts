@@ -10,9 +10,12 @@ export async function updateShoppingCartItemService(item: ShoppingCartItemDto): 
     const productRepository = ProductRepository.getInstance();
     const userRepository = UserRepository.getInstance();
 
-    const checkProduct = await productRepository.getByID(item.productID);
-    if(checkProduct instanceof ErrorCode)
+    const product = await productRepository.getByID(item.productID);
+    if(product instanceof ErrorCode)
         return new ErrorCode(400, 'Produto inválido');
+
+    if(item.quantity > product.stock)
+        return new ErrorCode(400, 'Quantidade em estoque insuficiente');
 
     const checkUser = await userRepository.getByID(item.userID);
     if(checkUser instanceof ErrorCode)
